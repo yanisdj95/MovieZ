@@ -18,7 +18,7 @@ const StyledFooter = styled.div`
     border-top-left-radius:10px;
     border-top-right-radius:10px;
     display:flex;
-    aligh-items:center;
+    align-items:center;
     justify-content:center;
 `
 
