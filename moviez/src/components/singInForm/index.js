@@ -80,7 +80,7 @@ const StyledDiv = styled.div`
     width:250px;
     height:100%;
     display:flex;
-    aligh-items:center;
+    align-items:center;
     flex-direction:column;
     box-sizing:border-box;
     padding-left:5px;
@@ -90,7 +90,7 @@ const StyledDiv = styled.div`
 const StyledDiv2 = styled.div`
     width:100%;
     display:flex;
-    aligh-items:center;
+    align-items:center;
     justify-content:center;
 `
 

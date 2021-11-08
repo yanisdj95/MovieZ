@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import logo from '../../img/MZ.png';
+
 const Navbar = () =>{
     const [showLinks, setShowLinks] = useState(false)
 
@@ -11,16 +13,16 @@ const Navbar = () =>{
     return(
             <StyledNavbar showLinks={showLinks}>
                 <StyledDivLogo>
-                    Logo
+                    <StyledLogo src={logo}></StyledLogo>
                 </StyledDivLogo>
                 <StyledList showLinks={showLinks}>
-                    <StyledElementNav>
+                    <StyledElementNav showLinks={showLinks}>
                         <StyledLink>Connexion</StyledLink>
                     </StyledElementNav>
-                    <StyledElementNav>
+                    <StyledElementNav showLinks={showLinks}>
                         <StyledLink>Inscription</StyledLink>
                     </StyledElementNav>
-                    <StyledElementNav>
+                    <StyledElementNav showLinks={showLinks}>
                         <StyledLink>Boutique</StyledLink>
                     </StyledElementNav>
                 </StyledList>
@@ -38,21 +40,26 @@ const StyledNavbar = styled.nav`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding-left: 1rem;
     position: fixed;
     width: 100%;
     min-height: 75px;
-    background-color: black;
-    color:white;
+    background-color: #3D3939;
+    color:#58DD94;
 `
 
 const StyledDivLogo = styled.div`
 
 `
 
+const StyledLogo = styled.img`
+    width:80px;
+    z-index: 10;
+`
+
 const StyledList = styled.ul`
     list-style: none;
-    padding: 0;
+    padding-right:3vh;
     margin: 0;
     display: flex;
     @media screen and (max-width:767px) {
@@ -70,23 +77,42 @@ const StyledList = styled.ul`
             props.showLinks ? props.showLinks : '100%'};
         bottom: 0;
         height: 100%;
-        background-color:black;
         padding:2rem;
+        padding-right: 0;
+        background-color: #3D3939;
         transition: all 0.8s ease-out;
     }    
 `
 
 const StyledElementNav = styled.li`
-    &:after{
-        content:"";
-        display:block;
-        margin: 0 auto;
-        width:3vw;
-        height:1px;
-        background: white;
-    }
-    &:last-child:after{
-        display:none;
+    @media screen and (max-width:767px) {
+        transform: translateY(100vh);
+        transform: ${props =>
+            props.showLinks ? props.showLinks : "translateY(0)"};
+        &:first-child {
+            transition: ${props =>
+                props.showLinks ? props.showLinks : "all 1s ease-out"};
+        }
+        &:nth-child(2) {
+            transition: ${props =>
+                props.showLinks ? props.showLinks : "all 1.15s ease-out"};
+        }
+        &:nth-child(3) {
+            transition: ${props =>
+            props.showLinks ? props.showLinks : "all 1.3s ease-out"};
+        }
+        }
+        &:after{
+            content:"";
+            display:block;
+            margin: 0 auto;
+            width:3vw;
+            height:1px;
+            background: white;
+        }
+        &:last-child:after{
+            display:none;
+        }
     }
 `
 
