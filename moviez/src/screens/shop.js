@@ -11,7 +11,6 @@ const Shop = () => {
     return (
         <ShopDiv>
             <H1>BOUTIQUE</H1>
-            <Latest/>
             <NowPlaying/>
             <UpComing/>
             <Popular/>

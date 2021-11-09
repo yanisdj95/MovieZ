@@ -14,7 +14,7 @@ const NowPlaying = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=934780721e54373dbb92f5d1dc942560"
+        "https://api.themoviedb.org/3/movie/now_playing?api_key=934780721e54373dbb92f5d1dc942560"
       )
       .then((response) => {
         setNowPlaying(response.data.results);
