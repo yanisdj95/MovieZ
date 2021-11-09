@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
 
 const Popular = () => {
+
+    const img_500 = "https://image.tmdb.org/t/p/w500"; 
+    const history = useHistory();
     const [popular, setPopular] = useState([])
+    const handleClick = (key) =>{
+      history.push(`/details/${key}`);
+  }
     
     useEffect(() => {
       
@@ -20,8 +27,8 @@ const Popular = () => {
         <WrapContent>
           <Grille>
             {popular.map(populars => (
-                <StyledDiv2 key={populars.id}>
-                  <StyledImg src={populars.image_url}></StyledImg>
+                <StyledDiv2 key={populars.id} onClick={()=>{handleClick(populars.id)}} >
+                  <StyledImg src={`${img_500}/${populars.backdrop_path}`}></StyledImg>
                   <StyledDiv>
                     <StyledH5>{populars.title}</StyledH5>
                   </StyledDiv>
@@ -33,6 +40,8 @@ const Popular = () => {
     )
   }
   ;
+
+
    
 
 export default Popular;

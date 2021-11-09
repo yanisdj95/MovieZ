@@ -3,12 +3,14 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 const TopRated = () => {
-    const [upcoming, setUpComing] = useState([])
+  const img_500 = "https://image.tmdb.org/t/p/w500"; 
+
+    const [topRated, setTopRated] = useState([])
   
     useEffect(() => {
       
         axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=934780721e54373dbb92f5d1dc942560').then(response => {
-          setUpComing(response.data.results)
+          setTopRated(response.data.results)
           console.log(response.data.results)
         })
       
@@ -19,11 +21,11 @@ const TopRated = () => {
      <H1>Top Rated</H1>
         <WrapContent>
           <Grille>
-            {upcoming.map(upcomings => (
-                <StyledDiv2 key={upcomings.id}>
-                  <StyledImg src={upcomings.image_url}></StyledImg>
+            {topRated.map(topRateds => (
+                <StyledDiv2 key={topRateds.id}>
+                  <StyledImg src={`${img_500}/${topRateds.backdrop_path}`}></StyledImg>
                   <StyledDiv>
-                    <StyledH5>{upcomings.title}</StyledH5>
+                    <StyledH5>{topRateds.title}</StyledH5>
                   </StyledDiv>
                 </StyledDiv2>
               ))}

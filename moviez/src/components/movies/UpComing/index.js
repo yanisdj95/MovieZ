@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 const UpComing = () => {
+  const img_500 = "https://image.tmdb.org/t/p/w500"; 
   const [upcoming, setUpComing] = useState([]);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const UpComing = () => {
         <Grille>
           {upcoming.map((upcomings) => (
             <StyledDiv2 key={upcomings.id}>
-              <StyledImg src={upcomings.image_url}></StyledImg>
+              <StyledImg src={`${img_500}/${upcomings.backdrop_path}`}></StyledImg>
               <StyledDiv>
                 <StyledH5>{upcomings.title}</StyledH5>
               </StyledDiv>
