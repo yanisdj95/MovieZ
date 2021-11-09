@@ -4,11 +4,15 @@ import styled from 'styled-components'
 import UpComing from '../components/movies/UpComing';
 import Popular from '../components/movies/Popular';
 import TopRated from '../components/movies/TopRated';
+import Latest from '../components/movies/Latest';
+import NowPlaying from '../components/movies/NowPlaying';
 
 const Shop = () => {
     return (
         <ShopDiv>
             <H1>BOUTIQUE</H1>
+            <Latest/>
+            <NowPlaying/>
             <UpComing/>
             <Popular/>
             <TopRated/>

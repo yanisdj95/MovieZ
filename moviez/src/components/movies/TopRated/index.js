@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
+import { useHistory } from 'react-router';
+
+
+
 
 const TopRated = () => {
   const img_500 = "https://image.tmdb.org/t/p/w500"; 
-
-    const [topRated, setTopRated] = useState([])
+  const [topRated, setTopRated] = useState([])
+  const history = useHistory();
+  const handleClick = (key) => {
+    history.push(`/details/${key}`);
+  };
   
     useEffect(() => {
       
@@ -22,7 +29,9 @@ const TopRated = () => {
         <WrapContent>
           <Grille>
             {topRated.map(topRateds => (
-                <StyledDiv2 key={topRateds.id}>
+                <StyledDiv2 key={topRateds.id} onClick={() => {
+                  handleClick(topRateds.id);
+                }}>
                   <StyledImg src={`${img_500}/${topRateds.backdrop_path}`}></StyledImg>
                   <StyledDiv>
                     <StyledH5>{topRateds.title}</StyledH5>

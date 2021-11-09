@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useHistory } from 'react-router';
+
 
 const UpComing = () => {
   const img_500 = "https://image.tmdb.org/t/p/w500"; 
   const [upcoming, setUpComing] = useState([]);
-
+  const history = useHistory();
+  const handleClick = (key) => {
+    history.push(`/details/${key}`);
+  };
+  
   useEffect(() => {
     axios
       .get(
@@ -23,7 +29,9 @@ const UpComing = () => {
       <WrapContent>
         <Grille>
           {upcoming.map((upcomings) => (
-            <StyledDiv2 key={upcomings.id}>
+            <StyledDiv2 key={upcomings.id} onClick={() => {
+              handleClick(upcomings.id);
+            }}>
               <StyledImg src={`${img_500}/${upcomings.backdrop_path}`}></StyledImg>
               <StyledDiv>
                 <StyledH5>{upcomings.title}</StyledH5>
