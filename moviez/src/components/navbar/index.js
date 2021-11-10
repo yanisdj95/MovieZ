@@ -101,7 +101,6 @@ const StyledElementNav = styled.li`
             transition: ${props =>
             props.showLinks ? props.showLinks : "all 1.3s ease-out"};
         }
-        }
         &:after{
             content:"";
             display:block;
