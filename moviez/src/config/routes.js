@@ -1,19 +1,23 @@
 import React from 'react';
+
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
-    Link
   } from "react-router-dom";
-const routes = () => {
+
+import SingInForm from '../components/singInForm';
+
+const Routes = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path ="/"></Route>
+                <Route exact path ="/">
+                    <SingInForm></SingInForm>
+                </Route>
             </Switch>
         </Router>
     );
 };
 
-export default routes;
+export default Routes;
