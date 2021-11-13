@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 
 
 const UpComing = () => {
-  const img_500 = "https://image.tmdb.org/t/p/w500"; 
+  const img_500 = "https://image.tmdb.org/t/p/w1280"; 
   const [upcoming, setUpComing] = useState([]);
   const history = useHistory();
   const handleClick = (key) => {
@@ -32,7 +32,7 @@ const UpComing = () => {
             <StyledDiv2 key={upcomings.id} onClick={() => {
               handleClick(upcomings.id);
             }}>
-              <StyledImg src={`${img_500}/${upcomings.backdrop_path}`}></StyledImg>
+              <StyledImg src={`${img_500}/${upcomings.poster_path}`}></StyledImg>
               <StyledDiv>
                 <StyledH5>{upcomings.title}</StyledH5>
               </StyledDiv>

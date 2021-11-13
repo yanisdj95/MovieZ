@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 
 
 const TopRated = () => {
-  const img_500 = "https://image.tmdb.org/t/p/w500"; 
+  const img_500 = "https://image.tmdb.org/t/p/w1280"; 
   const [topRated, setTopRated] = useState([])
   const history = useHistory();
   const handleClick = (key) => {
@@ -32,7 +32,7 @@ const TopRated = () => {
                 <StyledDiv2 key={topRateds.id} onClick={() => {
                   handleClick(topRateds.id);
                 }}>
-                  <StyledImg src={`${img_500}/${topRateds.backdrop_path}`}></StyledImg>
+                  <StyledImg src={`${img_500}/${topRateds.poster_path}`}></StyledImg>
                   <StyledDiv>
                     <StyledH5>{topRateds.title}</StyledH5>
                   </StyledDiv>
@@ -63,10 +63,10 @@ const Grille = styled.div`
 `
 
 const StyledImg = styled.img`
-  max-width: 100px;
-  height: auto;
-  border-radius: none;
-  margin: 15px;
+max-width: 100px;
+height: auto;
+border-radius: none;
+margin: 15px;
 `
 
 const StyledH5 = styled.h5`

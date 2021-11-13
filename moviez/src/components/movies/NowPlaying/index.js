@@ -5,12 +5,20 @@ import { useHistory } from 'react-router';
 
 
 const NowPlaying = () => {
-  const img_500 = "https://image.tmdb.org/t/p/w500"; 
+  const img_500 = "https://image.tmdb.org/t/p/w1280"; 
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const SEARCH_API =
+    "https://api.themoviedb.org/3/search/multi?api_key=934780721e54373dbb92f5d1dc942560&language=en-US&page=1&include_adult=false&query=";
+    
   const history = useHistory();
   const handleClick = (key) => {
     history.push(`/details/${key}`);
   };
+  const  HandleOnChange= (e) => {
+    setSearchTerm(e.target.value); 
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -22,16 +30,37 @@ const NowPlaying = () => {
       });
   }, []);
 
+  const HandleOnSubmit = (e) => {
+    e.preventDefault();
+    axios.get(SEARCH_API+searchTerm).then((response) => {
+        setNowPlaying(response.data.results)
+        console.log(response.data.results);})
+    }
+  
+
+  
+
   return (
     <PageContainer>
+        <form onSubmit={HandleOnSubmit}>
+          <header>
+            <input
+              type="search"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={HandleOnChange}
+            />
+          </header>
+        </form>
       <H1>Now Playing</H1>
+      
       <WrapContent>
         <Grille>
           {nowPlaying.map((nowPlayings) => (
             <StyledDiv2 key={nowPlayings.id} onClick={() => {
                 handleClick(nowPlayings.id);
               }}>
-              <StyledImg src={`${img_500}/${nowPlayings.backdrop_path}`}></StyledImg>
+              <StyledImg src={`${img_500}/${nowPlayings.poster_path}`}></StyledImg>
               <StyledDiv>
                 <StyledH5>{nowPlayings.title}</StyledH5>
               </StyledDiv>
@@ -43,6 +72,7 @@ const NowPlaying = () => {
   );
 };
 export default NowPlaying;
+
 const H1 =styled.h1`
 font-size: 50px;
 justify-content:center;

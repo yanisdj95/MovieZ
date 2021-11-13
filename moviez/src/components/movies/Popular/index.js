@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 
 const Popular = () => {
-  const img_500 = "https://image.tmdb.org/t/p/w500";
+  const img_500 = "https://image.tmdb.org/t/p/w1280";
   const [popular, setPopular] = useState([]);
   const history = useHistory();
   const handleClick = (key) => {
@@ -35,7 +35,7 @@ const Popular = () => {
               }}
             >
               <StyledImg
-                src={`${img_500}/${populars.backdrop_path}`}
+                src={`${img_500}/${populars.poster_path}`}
               ></StyledImg>
               <StyledDiv>
                 <StyledH5>{populars.title}</StyledH5>
