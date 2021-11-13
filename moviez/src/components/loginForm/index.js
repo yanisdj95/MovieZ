@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import logo from '../../img/MZ.png';
-import Footer from '../footer';
 import { media } from '../../features/media';
 import firebase from '../../config/Firebase';
 import { useState,useEffect } from 'react';
-import { useHistory } from 'react-router'
-
+import { useHistory } from 'react-router';
+import Footer from '../footer';
 const LoginForm = () => {
 
     const [email,setEmail] = useState('');
@@ -65,43 +64,45 @@ const LoginForm = () => {
     }
 
     return(
-       <MainContainer>
-            <FormContainer>
-                <StyledDiv>
-                        <StyledDiv2>
-                            <StyledImg src={logo}/>
-                        </StyledDiv2>
-                        <StyledDiv3>
-                            <StyledInput 
-                                    type="text" 
-                                    placeholder="email"
-                                    value={email}
-                                    onChange={(e)=>{setEmail(e.target.value)}}
-                            ></StyledInput>
-                            <StyledInput 
-                                    type="password" 
-                                    placeholder="password"
-                                    value={password}
-                                    onChange={(e)=>{setPassword(e.target.value)}}        
-                            ></StyledInput>
-                        </StyledDiv3>
-                        <StyledDiv2>
-                            <StyledButton
-                                 onClick={()=>handleSubmit()}
-                            >Sing In</StyledButton>
-                        </StyledDiv2> 
-                        <StyledDiv4>
-                            {filledInputs ? 
-                                        (errorLogin ?
-                                                    <StyledP>email or password wrong</StyledP>
-                                                    :null
-                                        ):<StyledP>You must fill all the inputs</StyledP> 
-                            }
-                        </StyledDiv4>   
-                </StyledDiv>
-           </FormContainer>
-           <Footer></Footer>
-       </MainContainer>
+       <div>
+        <MainContainer>
+                <FormContainer>
+                    <StyledDiv>
+                            <StyledDiv2>
+                                <StyledImg src={logo}/>
+                            </StyledDiv2>
+                            <StyledDiv3>
+                                <StyledInput 
+                                        type="text" 
+                                        placeholder="email"
+                                        value={email}
+                                        onChange={(e)=>{setEmail(e.target.value)}}
+                                ></StyledInput>
+                                <StyledInput 
+                                        type="password" 
+                                        placeholder="password"
+                                        value={password}
+                                        onChange={(e)=>{setPassword(e.target.value)}}        
+                                ></StyledInput>
+                            </StyledDiv3>
+                            <StyledDiv2>
+                                <StyledButton
+                                    onClick={()=>handleSubmit()}
+                                >Sing In</StyledButton>
+                            </StyledDiv2> 
+                            <StyledDiv4>
+                                {filledInputs ? 
+                                            (errorLogin ?
+                                                        <StyledP>email or password wrong</StyledP>
+                                                        :null
+                                            ):<StyledP>You must fill all the inputs</StyledP> 
+                                }
+                            </StyledDiv4>   
+                    </StyledDiv>
+            </FormContainer>
+        </MainContainer>
+        <Footer></Footer>
+     </div>
     );
 }
 
@@ -109,7 +110,7 @@ export default LoginForm;
 
 const MainContainer = styled.div`
   width:100%;
-  height:100vh;
+  height:94vh;
   display: flex;
   justify-content: center;
   padding-top:50px;
