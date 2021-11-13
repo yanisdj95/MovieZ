@@ -10,17 +10,18 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled.div`
-  width: 100%;
-  height: 40px;
-  bottom: 0;
-  position: fixed;
-  background: #3d3939;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
+    width:100%;
+    height:40px;
+    bottom:0;
+    position:fixed;
+    background:#3D3939;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+`
 
 const StyledP = styled.p`
   font-family: "Nunito", sans-serif;

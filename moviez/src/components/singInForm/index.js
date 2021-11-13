@@ -1,29 +1,31 @@
 import styled from 'styled-components';
 import logo from '../../img/MZ.png';
 import Footer from '../footer';
+import Navbar from '../navbar';
 
 const SingInForm = () => {
     return(
-       <MainContainer>
+        <><Navbar></Navbar>
+            <MainContainer>
             <FormContainer>
                 <StyledDiv>
-                        <StyledDiv2>
-                            <StyledImg src={logo}/>
-                        </StyledDiv2>
-                        <StyledDiv3>
-                            <StyledInput type="text" placeholder="First Name"></StyledInput>
-                            <StyledInput type="text" placeholder="Last Neme"></StyledInput>
-                            <StyledInput type="text" placeholder="Username"></StyledInput>
-                            <StyledInput type="text" placeholder="email"></StyledInput>
-                            <StyledInput type="text" placeholder="password"></StyledInput>
-                        </StyledDiv3>
-                        <StyledDiv2>
-                            <StyledButton>Sing In</StyledButton>
-                        </StyledDiv2>   
+                    <StyledDiv2>
+                        <StyledImg src={logo} />
+                    </StyledDiv2>
+                    <StyledDiv3>
+                        <StyledInput type="text" placeholder="First Name"></StyledInput>
+                        <StyledInput type="text" placeholder="Last Neme"></StyledInput>
+                        <StyledInput type="text" placeholder="Username"></StyledInput>
+                        <StyledInput type="text" placeholder="email"></StyledInput>
+                        <StyledInput type="text" placeholder="password"></StyledInput>
+                    </StyledDiv3>
+                    <StyledDiv2>
+                        <StyledButton>Sing In</StyledButton>
+                    </StyledDiv2>
                 </StyledDiv>
-           </FormContainer>
-           <Footer></Footer>
-       </MainContainer>
+            </FormContainer>
+            <Footer></Footer>
+        </MainContainer></>
     );
 }
 
@@ -78,7 +80,7 @@ const StyledDiv = styled.div`
     width:250px;
     height:100%;
     display:flex;
-    aligh-items:center;
+    align-items:center;
     flex-direction:column;
     box-sizing:border-box;
     padding-left:5px;
@@ -88,7 +90,7 @@ const StyledDiv = styled.div`
 const StyledDiv2 = styled.div`
     width:100%;
     display:flex;
-    aligh-items:center;
+    align-items:center;
     justify-content:center;
 `
 
