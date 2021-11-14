@@ -8,6 +8,7 @@ const Details = (props) => {
   const param = useParams();
   const [detail, setDetail] = useState({});
   const img_500 = "https://image.tmdb.org/t/p/w1280";
+  const FormatUS = Intl.NumberFormat("en");
 
   useEffect(() => {
     axios
@@ -24,22 +25,25 @@ const Details = (props) => {
     <StyledB>
       <ContainerD>
         <Wrapper>
-          <WrapContent>
+          <WrapContentImg>
             <StyledImg
               src={`${img_500}/${detail.poster_path}`}
               alt="img"
             ></StyledImg>
-          </WrapContent>
+          </WrapContentImg>
           <WrapContent>
             <StyledH1>{detail.title}</StyledH1>
             <StyledHr />
+            <StyledH2>Storyline</StyledH2>
             <StyledP>{detail.overview}</StyledP>
             <StyledHr />
-            <ul>
-              <li></li>  
-              <li></li>  
-              <li></li>  
-            </ul>
+            <StyledUl>
+              <StyledLi>Release Date :  {detail.release_date}</StyledLi>
+              <StyledLi>Budget : {FormatUS.format(detail.budget)} $</StyledLi>
+              <StyledLi>Revenue : {FormatUS.format(detail.revenue)} $</StyledLi>
+              <StyledLi>Duration : {detail.runtime} min</StyledLi>
+              <StyledLi>Public vote : {detail.vote_average}/10</StyledLi>
+            </StyledUl>
           </WrapContent>
         </Wrapper>
       </ContainerD>
@@ -52,11 +56,10 @@ export default Details;
 
 const StyledB = styled.div`
   background-color: #3d3939;
-  height: 100vh;
-  @media(min-width: 40em) {
+  height: 100%;
+  @media (min-width: 40em) {
     height: 100vh;
   }
-  
 `;
 const ContainerD = styled.div`
   padding: 3rem 0;
@@ -64,41 +67,49 @@ const ContainerD = styled.div`
   width: min(90%, 75.5rem);
 `;
 const Wrapper = styled.div`
-  
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 40em) {
     display: flex;
-    flex-direction: column;
-   
-    @media(min-width: 40em) {
-    display: flex;
-    gap: 200px;
     flex-direction: row;
     * {
       flex-basis: 100vh;
     }
+    * {
+      margin-left: 2em;
+    }
   }
-  
 `;
 
-const ImageCont = styled.div`
-
-`;
-
-const WrapContent = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-@media(min-width: 1250px) {
-  display: block;
+const WrapContentImg = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  @media (min-width: 40em) {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  5px 5px 10px #484444;
 
-}
+  }
 `
+const WrapContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (min-width: 40em) {
+    display: block;
+    justify-content: center;
+    align-items: center;
+
+  }
+`;
 
 const StyledImg = styled.img`
   display: block;
   max-width: 100%;
+  border-radius: 5px;
 `;
 
 const StyledH1 = styled.h1`
@@ -111,7 +122,8 @@ const StyledH1 = styled.h1`
   justify-content: center;
   align-items: center;
   color: #b6b6b6;
-  @media(min-width: 1250px) {
+  
+  @media (min-width: 40em) {
     text-transform: uppercase;
     font-family: "Nunito", sans-serif;
     font-weight: bold;
@@ -120,34 +132,116 @@ const StyledH1 = styled.h1`
     justify-content: center;
     align-items: center;
     color: #b6b6b6;
-    padding-top: 80px;
+    padding-top: 30px;
     max-width: 40rem;
   }
- 
 `;
-
+const StyledH2 =styled.h2`
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  color: #b6b6b6;  
+  margin-bottom: -5px;
+  
+  @media (min-width: 40em) {
+    margin-bottom: -30px;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    color: #b6b6b6;
+  }
+`
 const StyledP = styled.p`
   font-size: 10px;
   font-family: Open Sans;
   color: #b6b6b6;
   justify-content: center;
-  @media(min-width: 1250px) {
+  @media (min-width: 40em) {
+    font-size: 20px;
+    font-family: Open Sans;
+    color: #b6b6b6;
+    justify-content: center;
+    padding: 30px;
+  }
+`;
+
+const StyledHr = styled.hr`
+  width: 80%;
+  height: 0.5px;
+  background-color: #fff;
+  margin-right: 40px;
+`;
+const StyledUl = styled.ul`
+padding: 0;
+
+`;
+const StyledLi = styled.li`
+ 
+  line-height: 1.5rem;
+  list-style: none;
+  font-size: 10px;
+  font-family: Open Sans;
+  color: #b6b6b6;
+  
+  @media (min-width: 40em) {
+  
+    line-height: 3rem;
     font-size: 20px;
     font-family: Open Sans;
     color: #b6b6b6;
     width: 90%;
     justify-content: center;
+   
   }
- 
 `;
 
-const StyledHr = styled.hr`
-  width: 90%;
-  height: 0.5px;
-  background-color: #fff;
-`;
+
 
 /* 
+<StyledLi><StyledH>Release Date</StyledH> :  {detail.release_date}</StyledLi>
+              <StyledLi><StyledH>Budget</StyledH> : {FormatUS.format(detail.budget)} $</StyledLi>
+              <StyledLi><StyledH>Revenue </StyledH>: {FormatUS.format(detail.revenue)} $</StyledLi>
+              <StyledLi><StyledH>Duration</StyledH> : {detail.runtime} min</StyledLi>
+              <StyledLi><StyledH>Public vote</StyledH> : {detail.vote_average}/10</StyledLi>
+
+const StyledUl = styled.ul`
+padding: 0;
+@media (min-width: 1250px) {
+  padding: 10px;
+
+}
+`;
+const StyledLi = styled.li`
+  display: flex;
+  align-items:center;
+  justify-content: flex-start;
+  line-height: 1.5rem;
+  list-style: none;
+  font-size: 10px;
+  font-family: Open Sans;
+  color: #b6b6b6;
+  
+  @media (min-width: 1250px) {
+  background-color: green;
+  display: flex;
+  align-items:left;
+    font-size: 20px;
+    font-family: Open Sans;
+    color: #b6b6b6;
+    width: 90%;
+    justify-content: center;
+    *+*{
+    margin-left: 0em;
+  }
+  }
+`;
+const StyledH = styled.p`
+font-weight: bold;
+`
+
+
 const StyledB = styled.div`
   width: 100%;
   height: 100%;

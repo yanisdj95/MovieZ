@@ -10,6 +10,7 @@ import Login from "../screens/login";
 import Register from "../screens/register";
 import Shop from "../screens/shop";
 import Details from "../components/movieDetail/details";
+import GlobalStyle from "./globalStyle";
 
 const Routes = () => {
   return (
