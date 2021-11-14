@@ -64,7 +64,7 @@ const StyledDiv3_1 = styled.div`
    height:30px;
 `
 const StyledDiv3_2 = styled.div`
-  width:25%;
+  width:100%;
   display:flex;
    align-items:center;
    justify-content:flex-start;

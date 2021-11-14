@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import Nav from '../nav';
 import Footer from '../footer';
 import Slider from '../slider';
+import { useEffect } from 'react';
 const Accueil = () =>{
+
+    useEffect(()=>{
+        console.log(`user id : ${localStorage.getItem('userId')}`);
+    })
+
+
     return(
         <Container>
             <Nav></Nav>

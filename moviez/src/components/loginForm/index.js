@@ -39,6 +39,7 @@ const LoginForm = () => {
             if(user.email === email){
                 if(user.password == password){
                     clearInputs();
+                    localStorage.setItem('userId',user.id);
                     history.push('/');
                 }
             }
@@ -53,7 +54,9 @@ const LoginForm = () => {
     }
 
     useEffect(()=>{
-        getData();
+        
+        const isLoged = localStorage.getItem('userId');
+        isLoged != null ? history.push('/') : getData();
     },[])
 
     const handleSubmit = () =>{
@@ -122,7 +125,6 @@ const MainContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 `
 

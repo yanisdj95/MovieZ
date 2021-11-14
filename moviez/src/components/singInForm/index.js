@@ -4,6 +4,7 @@ import Footer from '../footer';
 import { media } from '../../features/media';
 import { useState,useEffect } from 'react';
 import firebase from '../../config/Firebase';
+import { useHistory } from 'react-router';
 import { uuid } from 'uuidv4';
 
 const SingInForm = () => {
@@ -18,6 +19,7 @@ const SingInForm = () => {
     const [filledInputs, setFilledInputs] = useState(true);
     
     const ref = firebase.firestore().collection("users");
+    const history = useHistory();
     
     const getData = () =>{
         ref.onSnapshot((querySnapshot) =>{
@@ -31,10 +33,8 @@ const SingInForm = () => {
 
 
     useEffect(()=>{
-        getData();
-        users.map(user=>{
-            console.log(user.username + " est le username : " + username)
-        })
+        const isLoged = localStorage.getItem('userId');
+        isLoged != null ? history.push('/') : getData();
     },[])
 
      
@@ -103,65 +103,67 @@ const SingInForm = () => {
     }
 
     return(
-       <MainContainer>
-            <FormContainer>
-                <StyledDiv>
-                        <StyledDiv2>
-                            <StyledImg src={logo}/>
-                        </StyledDiv2>
-                        <StyledDiv3>
-                            <StyledInput 
-                                type="text" 
-                                placeholder="firstame"
-                                value={firstname}
-                                onChange={(e)=>{setFirstName(e.target.value)}}
-                            ></StyledInput>
-                            <StyledInput 
-                                type="text" 
-                                placeholder="lastname"
-                                value={lastname}
-                                onChange={(e)=>{setLastname(e.target.value)}}
-                            ></StyledInput>
-                            <StyledInput 
-                                type="text" 
-                                placeholder="username"
-                                value={username}
-                                onChange={(e)=>{setUsername(e.target.value)}}
-                            ></StyledInput>
-                            <StyledInput 
-                                type="text" 
-                                placeholder="email"
-                                value={email}
-                                onChange={(e)=>{setEmail(e.target.value)}}
-                            ></StyledInput>
-                            <StyledInput 
-                                type="password" 
-                                placeholder="password"
-                                value={password}
-                                onChange={(e)=>{setPassword(e.target.value)}}
-                            ></StyledInput>
-                        </StyledDiv3>
+        <div>
+        <MainContainer>
+                <FormContainer>
+                    <StyledDiv>
+                            <StyledDiv2>
+                                <StyledImg src={logo}/>
+                            </StyledDiv2>
+                            <StyledDiv3>
+                                <StyledInput 
+                                    type="text" 
+                                    placeholder="firstame"
+                                    value={firstname}
+                                    onChange={(e)=>{setFirstName(e.target.value)}}
+                                ></StyledInput>
+                                <StyledInput 
+                                    type="text" 
+                                    placeholder="lastname"
+                                    value={lastname}
+                                    onChange={(e)=>{setLastname(e.target.value)}}
+                                ></StyledInput>
+                                <StyledInput 
+                                    type="text" 
+                                    placeholder="username"
+                                    value={username}
+                                    onChange={(e)=>{setUsername(e.target.value)}}
+                                ></StyledInput>
+                                <StyledInput 
+                                    type="text" 
+                                    placeholder="email"
+                                    value={email}
+                                    onChange={(e)=>{setEmail(e.target.value)}}
+                                ></StyledInput>
+                                <StyledInput 
+                                    type="password" 
+                                    placeholder="password"
+                                    value={password}
+                                    onChange={(e)=>{setPassword(e.target.value)}}
+                                ></StyledInput>
+                            </StyledDiv3>
 
-                        <StyledDiv2>
-                            <StyledButton
-                                onClick={()=>handleSubmit()}
-                            >Sing In</StyledButton>
+                            <StyledDiv2>
+                                <StyledButton
+                                    onClick={()=>handleSubmit()}
+                                >Sing In</StyledButton>
+                                
+                            </StyledDiv2> 
+
+                            <StyledDiv4>
+                                {filledInputs ? 
+                                            (errorRegister ?
+                                                        <StyledP>User already exist</StyledP>
+                                                        :null
+                                            ):<StyledP>You must fill all the inputs</StyledP> 
+                                }
+                            </StyledDiv4> 
                             
-                        </StyledDiv2> 
-
-                        <StyledDiv4>
-                            {filledInputs ? 
-                                        (errorRegister ?
-                                                    <StyledP>User already exist</StyledP>
-                                                    :null
-                                        ):<StyledP>You must fill all the inputs</StyledP> 
-                            }
-                        </StyledDiv4> 
-                        
-                </StyledDiv>
-           </FormContainer>
-           <Footer></Footer>
-       </MainContainer>
+                    </StyledDiv>
+            </FormContainer>
+        </MainContainer>
+        <Footer></Footer>
+     </div>
     );
 }
 

@@ -7,6 +7,8 @@ import adams from '../../img/adams.jpg';
 import freeguy from '../../img/freeguy.jpg';
 import snakeeyes from '../../img/snakeeyes.jpg';
 import styled, { keyframes } from 'styled-components';
+import { media } from '../../features/media';
+
 const Slider = () =>{
     return(
       <Sliderr>
@@ -41,6 +43,16 @@ const glisse = keyframes`
  80%  {transform: translateX(-2536px);}
  100% {transform: translateX(0);}
 `
+const glisseForPhone = keyframes`
+ 0%   {transform: translateX(0);}
+ 16%  {transform: translateX(-375px);}
+ 32%  {transform: translateX(-750px);}
+ 48%  {transform: translateX(-1125px);}
+ 54%  {transform: translateX(-1500px);}
+ 70%  {transform: translateX(-1875px);}
+ 86%  {transform: translateX(-2250px);}
+ 100% {transform: translateX(0);}
+`
 
 const Slides = styled.div`
   width: 100%;
@@ -53,11 +65,23 @@ const Slides = styled.div`
 const Slide = styled.div`
    height:98vh;
    animation: ${glisse} 8s infinite;
+   ${media.phone}{
+    height:98vh;
+    animation: ${glisseForPhone} 8s infinite;
+   }
 `
 
 const StyledImg = styled.img`
     width: calc(100vw/3);
     height:100vh;
+    ${media.tablet}{
+        width: calc(100vw/2);
+        height:100vh;
+    }
+    ${media.phone}{
+        width: 100vw;
+        height:100vh;
+    }
 `
 
 
