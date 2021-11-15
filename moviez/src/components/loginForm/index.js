@@ -1,22 +1,30 @@
 import styled from 'styled-components';
 import logo from '../../img/MZ.png';
 import { media } from '../../features/media';
-import firebase from '../../config/Firebase';
+//import firebase from '../../config/Firebase';
 import { useState,useEffect } from 'react';
+import { get_data } from '../../actions/database';
+import { getUsers } from '../../actions/database';
+import { useSelector,useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import Footer from '../footer';
 const LoginForm = () => {
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const [users,setUsers] = useState([]);
+    //const [users,setUsers] = useState([]);
     const [errorLogin, setErrorLogin] = useState(false);
     const [filledInputs, setFilledInputs] = useState(true);
 
-    const ref = firebase.firestore().collection("users");
+    //const ref = firebase.firestore().collection("users");
     const history = useHistory()
+    const dispatch = useDispatch()
 
-    const getData = () =>{
+    
+    const users = useSelector(state=>state.database.users);
+    
+
+    /*const getData = () =>{
         ref.onSnapshot((querySnapshot) =>{
             const items = [];
             querySnapshot.forEach((doc)=>{
@@ -24,7 +32,7 @@ const LoginForm = () => {
             })
             setUsers(items);
         })
-    }
+    }*/
 
     const checkInputs = () => {
         if((email === '')||(password === '')){
@@ -54,9 +62,8 @@ const LoginForm = () => {
     }
 
     useEffect(()=>{
-        
         const isLoged = localStorage.getItem('userId');
-        isLoged != null ? history.push('/') : getData();
+        isLoged != null ? history.push('/') : dispatch(getUsers());
     },[])
 
     const handleSubmit = () =>{
