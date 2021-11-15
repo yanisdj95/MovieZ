@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +28,30 @@ const Routes = () => {
       </Router>
     </div>
   );
+=======
+import React from 'react';
+import Home from '../components/home';
+import Accueil from '../components/accueil';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+  } from "react-router-dom";
+import SingInForm from '../components/singInForm';
+import LoginForm from '../components/loginForm';
+import GlobalStyle from './globalStyle';
+const Routes = () => {
+    return (
+        <Router>
+        <GlobalStyle/>
+            <Switch>
+                <Route exact path ="/" component={Accueil}/>
+                <Route path="/signin" component={SingInForm}/>
+                <Route path="/login" component={LoginForm}/>
+            </Switch>   
+        </Router>
+    );
+>>>>>>> 08d83a94deacca872eff282868669001054f141b
 };
 
 export default Routes;
