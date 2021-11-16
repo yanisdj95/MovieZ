@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import Footer from "../footer";
-import { media } from "../features/media";
+import {BsCartCheck} from "react-icons/bs"
+import {MdOutlineFavoriteBorder} from "react-icons/md"
 const Details = (props) => {
   const param = useParams();
   const [detail, setDetail] = useState({});
@@ -44,6 +44,10 @@ const Details = (props) => {
               <StyledLi>Duration : {detail.runtime} min</StyledLi>
               <StyledLi>Public vote : {detail.vote_average}/10</StyledLi>
             </StyledUl>
+              <ButtonBox>
+              <SButton><StyledBP>Add to favorite</StyledBP><MdOutlineFavoriteBorder size='20' color='white'  /></SButton>
+              <SButton><StyledBP>Add to cart</StyledBP><BsCartCheck size='20' color='white'  /></SButton>
+              </ButtonBox>
           </WrapContent>
         </Wrapper>
       </ContainerD>
@@ -90,7 +94,6 @@ const WrapContentImg = styled.div`
     display: block;
     justify-content: center;
     align-items: center;
-    box-shadow:  5px 5px 10px #484444;
 
   }
 `
@@ -109,7 +112,7 @@ const WrapContent = styled.div`
 const StyledImg = styled.img`
   display: block;
   max-width: 100%;
-  border-radius: 5px;
+  border-radius: 15px;
 `;
 
 const StyledH1 = styled.h1`
@@ -167,6 +170,8 @@ const StyledP = styled.p`
   }
 `;
 
+
+
 const StyledHr = styled.hr`
   width: 80%;
   height: 0.5px;
@@ -196,9 +201,49 @@ const StyledLi = styled.li`
    
   }
 `;
+const ButtonBox= styled.div`
+display: flex;
+flex-direction: row;
+gap:10px;
+@media (min-width: 40em) {
+  display: flex;
+  flex-direction: row;
+  height:50px;
+  width: 100%;
+}
+`
+const SButton = styled.button`
+background-color: #58DD94;
+border:none;
+border-radius:10px;
+display:flex;
+width: 100%;
+gap: 10px;
+align-items: center;
+justify-content: center;
+@media (min-width: 40em) {
+display: flex;
+border:none;
+width: 100%;
+height:auto;
+align-items: center;
+justify-content: center;
 
-
-
+}
+`
+const StyledBP = styled.p`
+  font-size: 10px;
+  font-family: Open Sans;
+  color: #fff;
+  justify-content: center;
+  @media (min-width: 40em) {
+    font-size: 15px;
+    font-family: Open Sans;
+    color: #fff;
+    justify-content: center;
+    margin-right: -110px;
+  }
+`;
 /* 
 <StyledLi><StyledH>Release Date</StyledH> :  {detail.release_date}</StyledLi>
               <StyledLi><StyledH>Budget</StyledH> : {FormatUS.format(detail.budget)} $</StyledLi>
