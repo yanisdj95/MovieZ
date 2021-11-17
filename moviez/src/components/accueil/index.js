@@ -1,20 +1,26 @@
 import styled from 'styled-components';
-import Nav from '../nav';
+import LogedNav from '../nav/logedNav';
+import UnLogedNav from '../nav/unLogedNav';
 import Footer from '../footer';
 import Slider from '../slider';
-import { useEffect } from 'react';
+import { useState,useEffect } from 'react';
 const Accueil = () =>{
 
+    const [userId,setUserId] = useState(null);
+
     useEffect(()=>{
-        console.log(`user id : ${localStorage.getItem('userId')}`);
+        setUserId(localStorage.getItem('userId'));
+        console.log(userId);
     })
 
 
     return(
         <Container>
-            <Nav></Nav>
+            <SDiv>
+                {userId != null ? <UnLogedNav/>:<LogedNav/>}
+            </SDiv>
             <StyledDiv>
-                <Slider></Slider>
+               <Slider></Slider>
             </StyledDiv>
             <Footer></Footer>
         </Container>
@@ -22,12 +28,18 @@ const Accueil = () =>{
 }
 
 export default Accueil;
-
+const SDiv = styled.div`
+  width:100%;
+  height:50px;
+  
+`
 const Container = styled.div`
   width:100%;
+  height:100vh;
   background:#555454;
 `
 const StyledDiv = styled.div`
     width:100%;
     height:100vh;
+    background:yellow;
 `

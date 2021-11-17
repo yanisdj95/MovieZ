@@ -5,7 +5,11 @@ import { media } from '../../features/media';
 import { useState,useEffect } from 'react';
 import firebase from '../../config/Firebase';
 import { useHistory } from 'react-router';
+import { useSelector,useDispatch } from 'react-redux';
+import { addUser,getUsers } from '../../actions/database';
 import { uuid } from 'uuidv4';
+import _ from 'lodash';
+
 
 const SingInForm = () => {
 
@@ -14,27 +18,19 @@ const SingInForm = () => {
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [users,setUsers] = useState([]);
     const [errorRegister, setErrorRegister] = useState(false);
     const [filledInputs, setFilledInputs] = useState(true);
     
-    const ref = firebase.firestore().collection("users");
+
     const history = useHistory();
+    const dispatch = useDispatch()
+
+    const users = useSelector(state=>state.database.users);
     
-    const getData = () =>{
-        ref.onSnapshot((querySnapshot) =>{
-            const items = [];
-            querySnapshot.forEach((doc)=>{
-                items.push(doc.data());
-            })
-            setUsers(items);
-        })
-    }
-
-
     useEffect(()=>{
         const isLoged = localStorage.getItem('userId');
-        isLoged != null ? history.push('/') : getData();
+        isLoged != null ? history.push('/') : dispatch(getUsers());
+        console.log(`filledinputs: ${filledInputs}`)
     },[])
 
      
@@ -42,29 +38,24 @@ const SingInForm = () => {
     const checkInputs = () => {
         if((firstname === '')||(lastname === '')||(username === '')||(email === '')||(password === '')){
              setFilledInputs(false);
-        }else{
-                setFilledInputs(true);
-             }
+             return false;
+        }
+        setFilledInputs(true);
+        return true;
     } 
 
-    const userExist = () =>{
-        getData();
-        setErrorRegister(false)
-        users.map(user=>{
-            if(user.username === username){
+    const UserExist = () =>{
+        for(let i=0;i<users.length;i++){
+            if((users[i].email === email)||(users[i].username === username)){
                 setErrorRegister(true);
+                return true;
             }
-        })
-        if(errorRegister){
-            console.log("user trouvé")
-        }else{
-            console.log("user non trouvé");
         }
-        
-        return errorRegister;
+        setErrorRegister(false);
+     return false;
     }
 
-    const addUser = () =>{
+    const addU = () =>{
         const newUser = {
             firstname:firstname,
             lastname:lastname,
@@ -73,12 +64,8 @@ const SingInForm = () => {
             password:password,
             id:uuid()
         }
-        ref
-          .doc(newUser.id)
-          .set(newUser)
-          .catch((err) =>{
-            console.error(err);
-           });
+        addUser(newUser);
+        localStorage.setItem('userId',newUser.id);
     }
 
     const clearInputs = () => {
@@ -90,14 +77,15 @@ const SingInForm = () => {
     }
 
     const handleSubmit = () =>{
-        checkInputs();
-        if(filledInputs){
-           if(userExist()){
+        
+        if(checkInputs()){
+           if(!UserExist()){
                clearInputs();
-               addUser();
-               setErrorRegister(false);
+               addU();
+               history.push('/');
+               console.log("user Added");
            }else{
-               setErrorRegister(false)
+               console.log("user Not Added");
            }
         }
     }

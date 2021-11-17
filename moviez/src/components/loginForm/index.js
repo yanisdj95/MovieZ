@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import logo from '../../img/MZ.png';
 import { media } from '../../features/media';
-//import firebase from '../../config/Firebase';
 import { useState,useEffect } from 'react';
 import { get_data } from '../../actions/database';
 import { getUsers } from '../../actions/database';
@@ -12,27 +11,15 @@ const LoginForm = () => {
 
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    //const [users,setUsers] = useState([]);
     const [errorLogin, setErrorLogin] = useState(false);
     const [filledInputs, setFilledInputs] = useState(true);
 
-    //const ref = firebase.firestore().collection("users");
     const history = useHistory()
     const dispatch = useDispatch()
 
     
     const users = useSelector(state=>state.database.users);
     
-
-    /*const getData = () =>{
-        ref.onSnapshot((querySnapshot) =>{
-            const items = [];
-            querySnapshot.forEach((doc)=>{
-                items.push(doc.data());
-            })
-            setUsers(items);
-        })
-    }*/
 
     const checkInputs = () => {
         if((email === '')||(password === '')){

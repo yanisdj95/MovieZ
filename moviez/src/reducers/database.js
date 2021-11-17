@@ -1,4 +1,4 @@
-import { GET_DATA } from "../actions/database";
+import { ADD_DATA, GET_DATA } from "../actions/database";
 
 const initialState = {
     users:[]
@@ -12,6 +12,10 @@ export default (state = initialState, action) =>{
                 ...state,
                 users:action.payload
             }
+        case ADD_DATA:
+                return{
+                    ...state
+                }
         default:
             return state
     }

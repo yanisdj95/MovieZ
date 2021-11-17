@@ -38,6 +38,7 @@ const StyledFooter = styled.div`
     display:flex;
     flex-direction:column;
     bottom:0;
+    z-index: 3;
 `
 
 const StyledDiv1 = styled.div`
