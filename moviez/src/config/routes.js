@@ -1,6 +1,9 @@
 import React from 'react';
-import Home from '../components/home';
 import Accueil from '../components/accueil';
+import Shop from '../screens/shop';
+import Fav from '../components/favory';
+import Panier from '../components/panier';
+import Details from '../components/movieDetail/details';
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,6 +20,10 @@ const Routes = () => {
                 <Route exact path ="/" component={Accueil}/>
                 <Route path="/signin" component={SingInForm}/>
                 <Route path="/login" component={LoginForm}/>
+                <Route path="/panier" component={Panier}/>
+                <Route path="/shop" component={Shop}/>
+                <Route path="/fav" component={Fav}/>
+                <Route exact path="/details/:id" component={Details}/>
             </Switch>   
         </Router>
     );

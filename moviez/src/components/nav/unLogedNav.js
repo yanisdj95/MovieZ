@@ -5,13 +5,17 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { FaUserCircle } from 'react-icons/fa'
 import { useSelector,useDispatch } from 'react-redux';
-import { addUser,getUsers } from '../../actions/database';
+import { getUsers } from "../../actions/database";
+
+
+
 
 
 const UnLogedNav  = () =>{
 
     const [showLinks, setShowLinks] = useState(false)
 
+    const dispatch = useDispatch();
     const handleShowLinks = () => {
         setShowLinks(!showLinks)
     }
@@ -21,14 +25,15 @@ const UnLogedNav  = () =>{
     const history = useHistory();
 
     const users = useSelector(state=>state.database.users);
-
     const getUserName = () =>{
         users.map(user=>{
             if(user.id === localStorage.getItem('userId')){
                 setUsername(user.username);
+                return 0;
             }
         })
     }
+
 
     const logout = () =>{
         localStorage.removeItem('userId');
@@ -36,10 +41,19 @@ const UnLogedNav  = () =>{
     }
     useEffect(()=>{
         setShowLinks(true);
-        getUserName();
+        dispatch(getUsers());
+        
     },[])
 
+    useEffect(()=>{
+        console.log(users);
+        getUserName();
+
+    },[users])
+
+
     return(
+        
             <StyledNavbar showLinks={showLinks}>
                 <StyledDivLogo>
                     <StyledLogo src={logo}></StyledLogo>
@@ -68,17 +82,22 @@ const UnLogedNav  = () =>{
                         </StyledElementNav>
                 </StyledList>
                 <StyledDiv>
-                <StyledP2>{username}</StyledP2>
-                    <FaUserCircle size="2em"/>
+                    <StyledP2>{username}</StyledP2>
+                    <FaUserCircle size="2em" color="#58DD94"/>
                 </StyledDiv>
                 <StyledBurgerButton onClick={handleShowLinks}>
                     <StyledSpanBurgerLine showLinks={showLinks}></StyledSpanBurgerLine>
                 </StyledBurgerButton>
             </StyledNavbar>
+        
     );
 }
 
 export default UnLogedNav;
+
+const container = styled.div`
+ background:blue;
+`
 
 const StyledNavbar = styled.nav`
     display: flex;
@@ -89,8 +108,8 @@ const StyledNavbar = styled.nav`
     position: fixed;
     width: 100%;
     min-height: 50px;
-    color:#58DD94;
-    z-index: 3;
+    background:#3D3939;
+    z-index: 9999;
     box-sizing:border-box;
 `
 
